@@ -435,7 +435,7 @@ class Images(object):
             image.save(cache_file, format, quality=quality)
             cache_file.close()
         
-        return send_file(cache_path, mimetype=mimetype, max_age=cache_timeout)
+        return send_file(cache_path, mimetype=mimetype, max_age=cache_mtime)
 
 
 
