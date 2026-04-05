@@ -303,9 +303,10 @@ class Images(object):
 
         # Verify the signature.
         query = dict(iteritems(request.args))
-        old_sig = bytes(query.pop('s', None), 'utf-8')
-        if not old_sig:
+        sig = query.pop('s', None)
+        if not sig:
             abort(404)
+        old_sig = bytes(sig, 'utf-8')
         query_info = urlencode(sorted(iteritems(query)), True)
         msg_auth = hmac.new(as_bytes(current_app.secret_key),
             f'{path}?{query_info}'.encode('utf-8'),
@@ -435,7 +436,7 @@ class Images(object):
             image.save(cache_file, format, quality=quality)
             cache_file.close()
         
-        return send_file(cache_path, mimetype=mimetype, max_age=cache_mtime)
+        return send_file(cache_path, mimetype=mimetype, max_age=max_age)
 
 
 

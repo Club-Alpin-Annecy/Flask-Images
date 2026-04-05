@@ -1,4 +1,9 @@
 
+3.0.6
+-----
+- Fix TypeError crash when image request is missing signature parameter
+- Fix Cache-Control max_age using wrong value in send_file response
+
 3.0.4
 -----
 - Fix comparison between offset-aware and naive datetimes 
